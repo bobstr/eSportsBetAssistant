@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">e-sports bet assistant</string>
+    <string name="matches_list_button">List of matches</string>
 </resources>
