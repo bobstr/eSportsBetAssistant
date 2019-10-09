@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -24,6 +25,7 @@ public class MatchesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matches_list);
 
         result = (TextView) findViewById(R.id.result);
+        result.setMovementMethod(new ScrollingMovementMethod());
         getInfo();
     }
 
@@ -38,13 +40,14 @@ public class MatchesListActivity extends AppCompatActivity {
                             .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
                             .get();
                     String title = doc.title();
-                    Elements links = doc.select("div.match-day");
+                    Elements matchTabs = doc.select("a.standard-box");
 
                     builder.append(title).append("\n");
 
-                    for (Element link : links)
-                        builder.append("\n").append("Link : ").append(link.attr("href"))
-                                .append("\n").append("Text : ").append(link.text());
+                    for (Element tab : matchTabs)
+                        builder.append("\n").append(1 + matchTabs.indexOf(tab) + ") ").append(tab.text())
+                                .append("\n");
+
                 } catch (IOException e) {
                     builder.append("Error : ").append(e.getMessage()).append("\n");
                 }
