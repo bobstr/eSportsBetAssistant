@@ -60,17 +60,24 @@ public class MatchesListActivity extends AppCompatActivity {
                                 .get();
 
                         Elements date = matchDetail.select("div.date");
+                        Elements time = matchDetail.select("div.standard-box.teamsBox div.timeAndEvent div.time");
                         Elements team1 = matchDetail.select("div.team1-gradient a div.teamName");
                         Elements team2 = matchDetail.select("div.team2-gradient a div.teamName");
+                        Elements egbOdds = matchDetail.select("tr.egb-nolink");
                         Elements matchType = matchDetail.select("div.preformatted-text");
 
-                        builder.append("\n").append(1 + matchTabs.indexOf(tab) + ".")
+                        builder.append("\n")
+                                .append(1 + matchTabs.indexOf(tab) + ".")
                                 .append("\n")
                                 .append("Date: ").append(date.text())
+                                .append("\n")
+                                .append("Time: ").append(time.text())
                                 .append("\n")
                                 .append("Team 1: ").append(team1.text())
                                 .append("\n")
                                 .append("Team 2: ").append(team2.text())
+                                .append("\n")
+                                .append("EgbOdds: ").append(egbOdds.text())
                                 .append("\n")
                                 .append("Match type: ").append(matchType.text())
                                 .append("\n")
